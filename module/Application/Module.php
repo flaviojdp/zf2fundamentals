@@ -20,6 +20,14 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         date_default_timezone_set('UTC');
+        
+        $eventManager->attach( MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'), 100);
+    }
+    
+    public function onDispatch( MvcEvent $e)
+    {
+        $vm = $e->getViewModel();
+        $vm->setVariable('categories', 'CATEGORY_LIST');
     }
 
     public function getConfig()
