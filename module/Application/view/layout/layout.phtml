@@ -45,7 +45,19 @@
         </nav>
         <div class="container">
             <div class="col-lg-2">
-                <?php echo $this->categories; ?>
+                a
+                <?php //echo $this->categories; 
+                    echo $this->htmlList( $this->categories );
+                ?>
+                b
+                <ul>
+                <?php
+                 foreach ($this->categories as $categoria): ?>
+                    <li><?php echo $categoria;?></li>
+                <?php
+                 endforeach;
+                ?>
+                </ul>
             </div>
             <div class="col-lg-8">
                 <?php echo $this->content; ?>
