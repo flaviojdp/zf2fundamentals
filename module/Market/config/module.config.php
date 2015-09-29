@@ -3,6 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Market\Controller\Index' => 'Market\Controller\IndexController',
+            'Market\Controller\View' => 'Market\Controller\ViewController',
         ),
     ),
     'router' => array(
