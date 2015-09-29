@@ -15,7 +15,7 @@ return array(
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
-                        //'__NAMESPACE__' => 'Market\Controller',
+                        '__NAMESPACE__' => 'Market\Controller',
                         'controller'    => 'Market\Controller\Index',
                         'action'        => 'index',
                     ),
@@ -29,7 +29,7 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '/[:controller][/:action]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -44,7 +44,7 @@ return array(
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'Market' => __DIR__ . '/../view',
+            __DIR__ . '/../view',
         ),
     ),
 );
