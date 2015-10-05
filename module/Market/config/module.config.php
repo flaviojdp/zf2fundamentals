@@ -2,7 +2,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Market\Controller\Index' => 'Market\Controller\IndexController',
+            'market-index-controller' => 'Market\Controller\IndexController',
         ),
     ),
     'router' => array(
@@ -15,8 +15,8 @@ return array(
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
-                        '__NAMESPACE__' => 'Market\Controller',
-                        'controller'    => 'Market\Controller\Index',
+                        //'__NAMESPACE__' => 'Market\Controller',
+                        'controller'    => 'market-index-controller',
                         'action'        => 'index',
                     ),
                 ),
