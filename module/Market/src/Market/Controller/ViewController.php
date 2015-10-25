@@ -20,8 +20,8 @@ class ViewController extends AbstractActionController {
     
     public function indexAction() {
         
-        $category  = $this->params()->fromQuery('category');
-        
+        //$category  = $this->params()->fromQuery('category');
+        $category  = $this->params()->fromRoute('category');
         return new ViewModel(array(
             'category' => $category,
         ));
@@ -30,7 +30,8 @@ class ViewController extends AbstractActionController {
     public function itemAction()
     {
         //$itemId = $_GET['itemId'];
-        $itemId = $this->params()->fromQuery('itemId');
+        //$itemId = $this->params()->fromQuery('itemId');
+        $itemId = $this->params()->fromRoute('itemId');
         
         if(empty($itemId))
         {
