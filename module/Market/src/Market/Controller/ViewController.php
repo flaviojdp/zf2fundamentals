@@ -36,7 +36,7 @@ class ViewController extends AbstractActionController {
         if(empty($itemId))
         {
             $this->flashMessenger()->addMessage("Item not found!");
-            return $this->redirect()->toUrl('/market');
+            return $this->redirect()->toRoute('market');
         }
         
         return new ViewModel(array(

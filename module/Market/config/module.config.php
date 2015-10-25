@@ -37,45 +37,48 @@ return array(
                         'action'        => 'index',
                     ),
                 ),
-            ),
-            'market-view' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route' => '/market/view',
-                    'defaults' => array(
-                        'controller' => 'market-view-controller',
-                        'action' => 'index'
-                    ),
-                ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'index' => array(
-                        'type' => 'segment',
+                    'view' => array(
+                        'type' => 'literal',
                         'options' => array(
-                            'route' => '/main[/:category]'
-                        ),
-                    ),
-                    'item' => array(
-                        'type' => 'segment',
-                        'options' => array(
-                            'route' => '/item[/:itemId]',
+                            'route' => '/view',
                             'defaults' => array(
-                                'action' => 'item'
+                                'controller' => 'market-view-controller',
+                                'action' => 'index'
                             ),
-                            'constraints' => array(
-                                'itemId' => '[0-9]*'
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'index' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/main[/:category]'
+                                ),
+                            ),
+                            'item' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/item[/:itemId]',
+                                    'defaults' => array(
+                                        'action' => 'item'
+                                    ),
+                                    'constraints' => array(
+                                        'itemId' => '[0-9]*'
+                                    ),
+                                ),
                             ),
                         ),
                     ),
-                ),
-            ),
-            'market-post' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route' => '/market/post',
-                    'defaults' => array(
-                        'controller' => 'market-post-controller',
-                        'action' => 'index'
+                    'post' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/post',
+                            'defaults' => array(
+                                'controller' => 'market-post-controller',
+                                'action' => 'index'
+                            ),
+                        ),
                     ),
                 ),
             ),
