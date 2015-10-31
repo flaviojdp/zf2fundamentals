@@ -25,7 +25,7 @@ return array(
                 ),
             ),
             'market' => array(
-                'type'    => 'Literal',
+                'type'    => 'literal',
                 'options' => array(
                     // Change this to something specific to your module
                     'route'    => '/market',
@@ -39,8 +39,18 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'slash' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/',
+                            'defaults' => array(
+                                'controller'    => 'market-index-controller',
+                                'action'        => 'index',
+                            ),
+                        ),
+                     ),
                     'view' => array(
-                        'type' => 'literal',
+                        'type' => 'Literal',
                         'options' => array(
                             'route' => '/view',
                             'defaults' => array(
@@ -50,16 +60,26 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'slash' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/',
+                                    'defaults' => array(
+                                        'controller'    => 'market-view-controller',
+                                        'action'        => 'index',
+                                    ),
+                                ),
+                             ),
                             'index' => array(
                                 'type' => 'segment',
                                 'options' => array(
-                                    'route' => '/main[/:category]'
+                                    'route' => '/main[/:category][/]'
                                 ),
                             ),
                             'item' => array(
                                 'type' => 'segment',
                                 'options' => array(
-                                    'route' => '/item[/:itemId]',
+                                    'route' => '/item[/:itemId][/]',
                                     'defaults' => array(
                                         'action' => 'item'
                                     ),
