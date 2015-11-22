@@ -28,6 +28,7 @@ class PostControllerFactory implements FactoryInterface {
         
         $postConroller = new PostController();
         $postConroller->setCategories($categories);
+        $postConroller->setPostForm( $sm->get("market-post-form") );
         
         return $postConroller;
     }

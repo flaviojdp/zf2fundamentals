@@ -10,26 +10,24 @@ namespace Market\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Market\Controller\PostController;
+use Market\Form\PostForm;
 
 /**
  * Description of PostControllerFactory
  *
  * @author allê
  */
-class PostControllerFactory implements FactoryInterface {
+class PostFormFactory implements FactoryInterface {
     
-    public function createService(ServiceLocatorInterface $controllerManager) 
+    public function createService(ServiceLocatorInterface $sm) 
     {
-        $allServices = $controllerManager->getServiceLocator();
-        $sm = $allServices->get('ServiceManager');
-        
         $categories = $sm->get('categories');
         
-        $postConroller = new PostController();
-        $postConroller->setCategories($categories);
-        
-        return $postConroller;
+        $form = new PostForm();
+        $form->setCategories($categories);
+        $form->buildForm();
+        $form->setInputFilter($sm->get('market-post-filter'));
+        return $form;
     }
     
 }

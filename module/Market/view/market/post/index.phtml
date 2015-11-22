@@ -1,9 +1,11 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-Zend\Debug\Debug::dump($this->categories);
+<h1>Post Controller</h1>
+<style>
+    label{
+        width: 200px;
+    }
+</style>
+<?php $this->postForm->prepare(); ?>
+<?php echo $this->form()->openTag( $this->postForm ); ?>
+<?php echo $this->formCollection( $this->postForm ); ?>
+<?php echo $this->form()->closeTag( ); ?>
+<?php Zend\Debug\Debug::dump($this->data); ?>
