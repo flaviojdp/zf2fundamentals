@@ -18,12 +18,17 @@ use Zend\View\Model\ViewModel;
 class ViewController extends AbstractActionController {
     //put your code here
     
+    use ListingsTableTrait;
+    
     public function indexAction() {
         
         //$category  = $this->params()->fromQuery('category');
         $category  = $this->params()->fromRoute('category');
+        $listings = $this->getListingsTable()->getListingsByCategory( $category );
+
         return new ViewModel(array(
             'category' => $category,
+            'listings' => $listings
         ));
     }
     
