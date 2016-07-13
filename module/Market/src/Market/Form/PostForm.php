@@ -17,12 +17,11 @@ use Zend\Form\Element\Captcha;
 
 class PostForm extends Form{
     
-    private $categories;
-    
-    public function setCategories( $categories )
-    {
-        $this->categories = $categories;
-    }
+    //private $categories;
+    //private $expireDays;
+    use CategoryTrait;
+    use ExpireDaysTrait;
+    use CityCodeTrait;
     
     public function buildForm()
     {
@@ -46,8 +45,13 @@ class PostForm extends Form{
         $price = new Number('price');
         $price->setLabel('Price');
         
-        $dataExpires = new Radio("dataExpires");
+        $dataExpires = new Radio("expireDays");
         $dataExpires->setLabel("Data Expires");
+        $dataExpires
+                ->setValueOptions(
+                array_combine($this->expireDays, $this->expireDays)
+                )
+        ;
         
         $description = new Textarea("description");
         $description->setLabel("Description");
@@ -55,17 +59,17 @@ class PostForm extends Form{
         $photFilename = new Url("photo_filename");
         $photFilename->setLabel("Photo file name");
         
-        $contactName = new Text("contactName");
+        $contactName = new Text("contact_name");
         $contactName->setLabel("Contact name");
         
-        $contactEmail = new Email("contactEmail");
+        $contactEmail = new Email("contact_email");
         $contactEmail->setLabel("Contact email");
         
-        $contactPhone = new Text("contactPhone");
+        $contactPhone = new Text("contact_phone");
         $contactPhone->setLabel("Contact Phone");
         
-        $cityCode = new Select("cityCode");
-        $cityCode->setLabel("City code:");
+        $cityCode = $this->GetSelectCityCodes();
+        
         
         $deleteCode = new Number("delete_code");
         $deleteCode->setLabel("Delete Code");
@@ -82,7 +86,6 @@ class PostForm extends Form{
                 ->add($price)
                 ->add($dataExpires)
                 ->add($price)
-                ->add($dataExpires)
                 ->add($description)
                 ->add($photFilename)
                 ->add($contactName)
@@ -93,6 +96,23 @@ class PostForm extends Form{
                 //->add($captcha)
                 ->add($submit)
         ;
+    }
+    
+    private function GetSelectCityCodes(){
+        $cityCode = new Select("cityCode");
+        $cityCode->setLabel("City code:");
+        
+        $array = new \ArrayObject();
+        while ( $city = $this->getCityCodes()->current()):
+            $array->append( $city['city'].", ".$city['ISO2']);
+            $this->getCityCodes()->next();
+        endwhile;
+        
+        $cityCode->setValueOptions(
+                array_combine($array->getArrayCopy(), $array->getArrayCopy())
+                );
+        
+        return $cityCode;
     }
     
 }

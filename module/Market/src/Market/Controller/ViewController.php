@@ -44,8 +44,17 @@ class ViewController extends AbstractActionController {
             return $this->redirect()->toRoute('market');
         }
         
+        $item = $this->getListingsTable()->getListingById( $itemId );
+        
+        if(empty($item))
+        {
+            $this->flashMessenger()->addMessage("Item not found!");
+            return $this->redirect()->toRoute('market');
+        }
+        
         return new ViewModel(array(
-            'itemId' => $itemId
+            'itemId' => $itemId,
+            'item' => $item
         ));
     }
 }

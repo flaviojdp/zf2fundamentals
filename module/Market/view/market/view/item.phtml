@@ -7,3 +7,76 @@
  */
 
     echo $this->itemId;
+?>
+<h3>Detalhes do item</h3>
+<table>
+    <tr>
+        <td>listings_id</td>
+        <td><?php echo $this->item->listings_id; ?></td>
+    </tr>
+    <tr>
+        <td>category</td>
+        <td><?php echo $this->item->category ;?></td>
+    </tr>
+    <tr>
+        <td>title</td>
+        <td><?php echo $this->item->title ;?></td>
+    </tr>
+    <tr>
+        <td>data_created</td>
+        <td><?php echo date_format(new DateTime($this->item->data_created), 'd/m/Y') ;?></td>
+    </tr>
+    <tr>
+        <td>data_expires</td>
+        <td><?php echo (!empty($this->item->data_expires)) ? date_format(new DateTime($this->item->data_expires), 'd/m/Y') : '' ;?></td>
+    </tr>
+    <tr>
+        <td>description</td>
+        <td><?php echo $this->item->description ;?></td>
+    </tr>
+    <tr>
+        <td>photo_filename</td>
+        <td>
+            <?php
+                if( !empty($this->item->photo_filename)){
+                    $urlFile = $this->item->photo_filename;
+                    $urlFile = strtolower( $urlFile );
+                    if(strpos( $urlFile, 'http') === false){
+                        $urlFile = $this->basePath('/') . $urlFile;
+                    }
+                    ?>
+            <image src="<?php echo $urlFile;?>" />
+                    <?php
+                }
+                else
+                {
+                    echo "No Image";
+                }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>contact_name</td>
+        <td><?php echo $this->item->contact_name ;?></td>
+    </tr>
+    <tr>
+        <td>contact_email</td>
+        <td><?php echo $this->item->contact_email ;?></td>
+    </tr>
+    <tr>
+        <td>contact_phone</td>
+        <td><?php echo $this->item->contact_phone ;?></td>
+    </tr>
+    <tr>
+        <td>city</td>
+        <td><?php echo $this->item->city ;?></td>
+    </tr>
+    <tr>
+        <td>country</td>
+        <td><?php echo $this->item->country ;?></td>
+    </tr>
+    <tr>
+        <td>price</td>
+        <td><?php echo $this->item->price ;?></td>
+    </tr>
+</table>

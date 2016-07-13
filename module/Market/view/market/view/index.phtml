@@ -11,7 +11,12 @@
 <?php foreach ($listings as $item): ?>
     <tr style="background-color:<?php echo $this->cycle(array('#F0F0F0','#FFF'))->next(); ?>" >
         <td>
-            <a href="#"><?php echo $item->title; ?></a>
+            <a href="<?php 
+                echo $this->url('market/view/item',array(
+                    'itemId' => $item->listings_id,
+                ));
+                
+                ?>"><?php echo $item->title; ?></a>
         </td>
         <td>
             <?php echo $item->price; ?>

@@ -22,13 +22,13 @@ class PostController extends AbstractActionController {
     
     public $categories;
     private $postForm;
-    
+
     public function setPostForm( $postForm )
     {
         $this->postForm = $postForm;
     }
 
-        public function setCategories( $categories )
+    public function setCategories( $categories )
     {
         $this->categories = $categories;
     }
@@ -48,6 +48,10 @@ class PostController extends AbstractActionController {
             $this->postForm->setData( $data );
             if($this->postForm->isValid())
             {
+                
+                //$f = new \Zend\Form\Form();
+                //$f->getData();
+                $this->getListingsTable()->addPost( $this->postForm->getData() );
                 $this->flashMessenger()
                     ->addMessage("Thanks for posting!");
                 $this->redirect()->toRoute('home');
